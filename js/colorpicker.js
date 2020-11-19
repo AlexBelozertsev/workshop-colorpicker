@@ -52,7 +52,6 @@ function onPaletteClick(evt) {
 // body painting
     setBodyBgColor(evt.target.dataset.hex);
     animatedActiveCard(evt);
-    
 };
 
 function setBodyBgColor(color) {
