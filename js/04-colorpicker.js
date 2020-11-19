@@ -44,22 +44,35 @@ palette.insertAdjacentHTML('beforeend', cardMarkup);
 palette.addEventListener('click', onPaletteClick);
 
 function onPaletteClick(evt) {
+// проверка на клик в палитру
     const colorSwatch = evt.target.classList.contains('color-swatch');
     if (!colorSwatch) {
         return;
     };
-// вызов родителя (1 вложенность)
-    // const parentColorCard = evt.target.parentNode;
-    // console.log(parentColorCard);
+// body painting
+    setBodyBgColor(evt.target.dataset.hex);
+    animatedActiveCard(evt);
+    
+};
 
-// делаю активной только 1 карточку
-        const currentActiveCard = document.querySelector('.color-card.is-active');
-        if (currentActiveCard) {
-            currentActiveCard.classList.remove('is-active')
-        }
+function setBodyBgColor(color) {
+    document.body.style.backgroundColor = color
+};
+
+// 4 step - анимирование карточки
+function animatedActiveCard(evt) {
+    removeActiveCardClass();
+    // вызов родителя (1 вложенность)
+    // const parentColorCard = evt.target.parentNode;
 // вызов ближайшего предка с заданными параметрами (closest - поиск вверх; querySelector - вглубь)
     const ancestorColorCard = evt.target.closest('.color-card');
     ancestorColorCard.classList.add('is-active');
-// body painting
-    document.body.style.backgroundColor = evt.target.dataset.hex;
-}
+};
+
+function removeActiveCardClass() {
+// делаю активной только 1 карточку
+    const currentActiveCard = document.querySelector('.color-card.is-active');
+        if (currentActiveCard) {
+            currentActiveCard.classList.remove('is-active')
+        }
+};
